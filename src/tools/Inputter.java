@@ -44,7 +44,7 @@ public class Inputter {
         do {
             result = getString(mess);
             more = !Acceptable.isValid(result, pattern);
-            if (more && (isLoop && result.length() > 0)) {
+            if (more) {
                 System.out.println("Data is invalid!. Re-enter...");
             }
         } while (isLoop && more);
