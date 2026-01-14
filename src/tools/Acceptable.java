@@ -9,7 +9,7 @@ public interface Acceptable {
     public final String POSITIVE_INT_VALID = "^[1-9]\\d*";
     public final String DOUBLE_VALID = "^-?\\d+(\\.\\d+)?$";
     public final String POSITIVE_DOUBLE_VALID = "^\\d+(\\.\\d+)?$";
-    public final String EMAIL_VALID = "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w])$";
+    public final String EMAIL_VALID = "^[a-zA-Z][\\w-]+@[\\w]+\\.[\\w]+$";
             
     public static boolean isValid(String data, String pattern){
         return data.matches(pattern);

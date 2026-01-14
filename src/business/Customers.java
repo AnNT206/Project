@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import model.Customer;
 
-public class Customers extends HashMap<String, Customer> {
+public class Customers extends HashMap<String, Customer> implements Workable<Customer> {
 
     private String pathFile; // lưu đường dẫn để ánh xạ vào tập 
     private boolean saved; // biến trạng thái đã lưu hay chưa lưu
@@ -22,11 +22,13 @@ public class Customers extends HashMap<String, Customer> {
         return saved;
     }
 
+    @Override
     public void addNew(Customer x) {
         this.put(x.getId(), x); //put hoặc putIfAbsent
         this.saved = false;
     }
 
+    @Override
     public void update(Customer x) {
         Customer z = this.get(x.getId());
         if (z != null) {
@@ -34,11 +36,12 @@ public class Customers extends HashMap<String, Customer> {
         }
     }
 
+    @Override
     public Customer searchById(String id) {
         return this.get(id);
     }
 
-    public List<Customer> fillterByName(String name) {
+    public List<Customer> filterByName(String name) {
         List<Customer> result = new ArrayList<>();
         for (Customer i : this.values()) {
             if (i.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -48,6 +51,7 @@ public class Customers extends HashMap<String, Customer> {
         return result;
     }
 
+    @Override
     public void showAll() {
         showAll(this.values());
     }
