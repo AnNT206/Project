@@ -48,9 +48,13 @@ public class Main {
                     }
                     break;
                 case 4:
+                    break;
                 case 5:
+                    break;
                 case 6:
+                    break;
                 case 7:
+                    break;
                 case 8:
                     dskh.showAll();
                     dsdh.showAll();
