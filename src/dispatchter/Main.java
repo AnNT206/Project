@@ -16,7 +16,7 @@ public class Main {
         Orders dsdh = new Orders();
         //--------- MENU ---------//
         do {
-            choice = ndl.getInt("-------------------\n"
+            choice = ndl.getInt("------------------------------------------\n"
                     + "\"1.Register customers.\n"
                     + "\"2.Update customer information.\n"         
                     + "\"3.Search for customer information by name.\n"
@@ -26,7 +26,7 @@ public class Main {
                     + "\"7.Save data to file.\n"
                     + "\"8.Display Customer or O rder lists.\n"
                     + "\"Others- Quit.\n"
-                    + "-----------------------------\n");
+                    + "------------------------------------------\n");
             switch(choice){
                 case 1:
                     Customer x = ndl.getCustomerInfo();
@@ -37,15 +37,6 @@ public class Main {
                     dskh.update(y);
                     break;
                 case 3:
-                    String name = ndl.getName("Enter customer name: ");
-                    List<Customer> result = dskh.filterByName(name);
-                    if(result.isEmpty()){
-                        System.out.println("No customer found.");
-                    }else{
-                        for(Customer i : result){
-                            i.showAll();
-                        }
-                    }
                     break;
                 case 4:
                     break;
@@ -56,9 +47,11 @@ public class Main {
                 case 7:
                     break;
                 case 8:
+                    System.out.println("Danh sach khach hang");
                     dskh.showAll();
-                    dsdh.showAll();
                     break;
+                default:
+                    System.out.println("END...");
 
             }
         } while (choice >= 1 && choice <= 8);

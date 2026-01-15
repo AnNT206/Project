@@ -51,11 +51,15 @@ public class Customer {
         this.email = email;
     }
 
-    public void showAll() {
-        System.out.println("Customer ID: " + id);
-        System.out.println("Customer Name: " + name);
-        System.out.println("Phone: " + phone);
-        System.out.println("Email: " + email);
-    }
+//    public void showAll() {
+//        System.out.println("Customer ID: " + id);
+//        System.out.println("Customer Name: " + name);
+//        System.out.println("Phone: " + phone);
+//        System.out.println("Email: " + email);
+//    }
 
+    @Override
+    public String toString() {
+        return String.format("|%5s|%-25s|%10s|%-30s|", this.id, this.name, this.phone, this.email);
+    }
 }

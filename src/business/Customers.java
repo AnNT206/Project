@@ -57,8 +57,12 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
     }
     
     public void showAll(Collection<Customer>l){
+        System.out.println("|-------------------------------------------------------------------------|\n" +
+                           "| ID  | FULL NAME               | PHONE    | EMAIL                        |\n" +
+                           "|-------------------------------------------------------------------------|");
         for (Customer i : l) {
             System.out.println(i);
         }
+        System.out.println("|-------------------------------------------------------------------------|\n");
     }
 }
