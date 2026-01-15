@@ -8,6 +8,10 @@ import model.Customer;
 
 public class Customers extends HashMap<String, Customer> implements Workable<Customer> {
 
+    private final String TABLE_HEADER = "|-------------------------------------------------------------------------|\n"
+            + "| ID  | FULL NAME               | PHONE    | EMAIL                        |\n"
+            + "|-------------------------------------------------------------------------|";
+    private final String TABLE_FOOTER = "|-------------------------------------------------------------------------|\n";
     private String pathFile; // lưu đường dẫn để ánh xạ vào tập 
     private boolean saved; // biến trạng thái đã lưu hay chưa lưu
 
@@ -55,14 +59,12 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
     public void showAll() {
         showAll(this.values());
     }
-    
-    public void showAll(Collection<Customer>l){
-        System.out.println("|-------------------------------------------------------------------------|\n" +
-                           "| ID  | FULL NAME               | PHONE    | EMAIL                        |\n" +
-                           "|-------------------------------------------------------------------------|");
+
+    public void showAll(Collection<Customer> l) {
+        System.out.println(TABLE_HEADER);
         for (Customer i : l) {
             System.out.println(i);
         }
-        System.out.println("|-------------------------------------------------------------------------|\n");
+        System.out.println(TABLE_FOOTER);
     }
 }

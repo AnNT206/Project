@@ -2,6 +2,7 @@ package dispatchter;
 
 import business.Customers;
 import business.Orders;
+import business.SetMenus;
 import model.Customer;
 import model.Order;
 import tools.Inputter;
@@ -13,12 +14,12 @@ public class Main {
         Inputter ndl = new Inputter();
         int choice = 0;
         Customers dskh = new Customers();
-        Orders dsdh = new Orders();
+        SetMenus mn = new SetMenus();
         //--------- MENU ---------//
         do {
             choice = ndl.getInt("------------------------------------------\n"
                     + "\"1.Register customers.\n"
-                    + "\"2.Update customer information.\n"         
+                    + "\"2.Update customer information.\n"
                     + "\"3.Search for customer information by name.\n"
                     + "\"4.Display feast menus.\n"
                     + "\"5.Place a feast order.\n"
@@ -26,8 +27,9 @@ public class Main {
                     + "\"7.Save data to file.\n"
                     + "\"8.Display Customer or O rder lists.\n"
                     + "\"Others- Quit.\n"
-                    + "------------------------------------------\n");
-            switch(choice){
+                    + "------------------------------------------\n"
+                    + "Your choice: ");
+            switch (choice) {
                 case 1:
                     Customer x = ndl.getCustomerInfo();
                     dskh.addNew(x);
@@ -37,8 +39,16 @@ public class Main {
                     dskh.update(y);
                     break;
                 case 3:
+                    String name = ndl.getName("Enter customer name: ");
+                    List<Customer> result = dskh.filterByName(name);
+                    if (result.isEmpty()) {
+                        System.out.println("No customer found.");
+                    } else {
+                        dskh.showAll(result);
+                    }
                     break;
                 case 4:
+                    mn.showAll();
                     break;
                 case 5:
                     break;
@@ -47,7 +57,7 @@ public class Main {
                 case 7:
                     break;
                 case 8:
-                    System.out.println("Danh sach khach hang");
+                    System.out.println("DANH SACH KHACH HANG:");
                     dskh.showAll();
                     break;
                 default:

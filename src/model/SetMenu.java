@@ -51,4 +51,9 @@ public class SetMenu {
         this.ingredients = ingredients;
     }
 
+    @Override
+    public String toString() {
+        return "SetMenu{" + "menuId=" + menuId + ", menuName=" + menuName + ", price=" + price + ", ingredients=" + ingredients + '}';
+    }
+
 }

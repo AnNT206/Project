@@ -78,7 +78,7 @@ public class Order implements Serializable {
     }
 
 //    Tạo mã đơn hàng dựa vào TimeStamp
-    private String generateOrderCode(){
+    private String generateOrderCode() {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
         return sdf.format(now);
