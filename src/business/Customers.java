@@ -34,9 +34,12 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
 
     @Override
     public void update(Customer x) {
-        Customer z = this.get(x.getId());
-        if (z != null) {
-            z = x;
+        Customer existing = this.get(x.getId());
+        if (existing != null) {
+            existing.setName(x.getName());
+            existing.setPhone(x.getPhone());
+            existing.setEmail(x.getEmail());
+            this.saved = false;
         }
     }
 

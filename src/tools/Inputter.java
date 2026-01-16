@@ -76,4 +76,13 @@ public class Inputter {
         x.setEmail(inputAndLoop("Customer email: ", Acceptable.EMAIL_VALID, true));
         return x;
     }
+
+    public Customer getCustomerInfoToUpdate(String existingId) {
+        Customer x = new Customer();
+        x.setId(existingId);
+        x.setName(inputAndLoop("Customer name: ", Acceptable.NAME_VALID, true));
+        x.setPhone(inputAndLoop("Phone number: ", Acceptable.PHONE_VALID, true));
+        x.setEmail(inputAndLoop("Customer email: ", Acceptable.EMAIL_VALID, true));
+        return x;
+    }
 }

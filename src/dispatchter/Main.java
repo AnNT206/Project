@@ -35,8 +35,19 @@ public class Main {
                     dskh.addNew(x);
                     break;
                 case 2:
-                    Customer y = ndl.getCustomerInfo();
-                    dskh.update(y);
+                    String customerId = ndl.getCusId("Enter customer ID to update: ");
+                    Customer existingCustomer = dskh.searchById(customerId);
+                    if (existingCustomer == null) {
+                        System.out.println("Customer not found!");
+                    } else {
+                        System.out.println("Current customer information:\n");
+                        System.out.println(existingCustomer);
+                        System.out.println("Update new information:\n");
+                        Customer updatedCustomer = ndl.getCustomerInfoToUpdate(customerId);
+                        dskh.update(updatedCustomer);
+                        System.out.println("Customer updated successfully!");
+
+                    }
                     break;
                 case 3:
                     String name = ndl.getName("Enter customer name: ");

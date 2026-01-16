@@ -113,4 +113,9 @@ public class Order implements Serializable {
         }
         return Objects.equals(this.eventDate, other.eventDate);
     }
+
+    @Override
+    public String toString() {
+        return String.format("|%5s|%-10s|%5s|%5s|%-10s|%-8d|%-14s|", this.orderCode, this.eventDate, this.customerId, this.menuId, this.numOfTables, this.province, this.eventDate);
+    }
 }
