@@ -7,13 +7,12 @@ import model.Order;
 import java.util.List;
 import java.util.ArrayList;
 public class Orders extends HashSet<Order> implements Workable<Order> {
-    private final String TABLE_HEADER = 
+    private final String ORDER_TABLE_HEADER = 
         "-------------------------------------------------------------------------\n" +
         "| Order ID| Event date | Customer code| Set menu| Price | Table | Cost   \n" +
         "-------------------------------------------------------------------------\n";
-    private final String TABLE_FOOTER =
+    private final String ORDER_TABLE_FOOTER =
         "-------------------------------------------------------------------------\n";
-    private final String TABLE_ROW_FORMAT = "%-8s|%-12s|%-14s|%-9s|%-10s|%-8d|%-14s\n";
     private String pathFile;
     private boolean saved;
 

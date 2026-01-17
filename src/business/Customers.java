@@ -1,9 +1,18 @@
 package business;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Customer;
 
 public class Customers extends HashMap<String, Customer> implements Workable<Customer> {
@@ -69,5 +78,66 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
             System.out.println(i);
         }
         System.out.println(TABLE_FOOTER);
+    }
+
+    public void saveToFile() {
+        try {
+            // 0. kiểm tra nếu đã lưu rồi thì không ghi nữa
+            if (this.saved) {
+                return;
+            }
+            FileOutputStream fos = null;
+            
+            //1. Tạo File object
+            File f = new File(this.pathFile);
+            //2. Tạo FileObjectSteam ánh xạ tới File object
+            fos = new FileOutputStream(f);
+            //3. Tạo ObjectOutputStream để chuyển dữ liệu xuống thiết bị
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // 4. Lặp để ghi dữ liệu
+            for (Customer i : this.values()) {
+                oos.writeObject(i);
+            }
+            //5. Đóng các object tương ứng
+            oos.close();
+            fos.close();
+            //6. Ghi nhận trạng thái mới
+            this.saved = true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public final void readFromFile(){
+        try {
+            FileInputStream fis = null;
+            //1. Tạo File object
+            File f= new File(this.pathFile);
+            if(!f.exists()){
+                System.out.println("Customer.dat file not found!.");
+                return;
+            }
+            //2. Tạo lường ánh xạ
+            fis = new FileInputStream(f);
+            //3. Tạo đối tượng
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            //4. Lặp để đọc dữ liệu
+            while(fis.available() > 0){
+                Customer x = (Customer) ois.readObject();
+                this.put(x.getId(), x);
+            }
+            //5. Đóng đối tượng
+            ois.close();
+            fis.close();
+            this.saved = true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
