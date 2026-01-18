@@ -12,6 +12,7 @@ public interface Acceptable {
     public final String EMAIL_VALID = "^[a-zA-Z][\\w-]+@[\\w]+\\.[\\w]+$";
     public final String MENU_ID_VALID = "^[A-Z]{2}\\d{3}$";
     public final String PROVINCE_VALID = "^[a-zA-Z\\s]{2,20}$";
+    
 
     public static boolean isValid(String data, String pattern){
         return data.matches(pattern);

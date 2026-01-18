@@ -17,7 +17,7 @@ import model.Order;
 public class Orders extends HashSet<Order> implements Workable<Order> {
     private final String ORDER_TABLE_HEADER = 
         "-------------------------------------------------------------------------\n" +
-        "| Order ID| Event date | Customer code| Set menu| Price | Table | Cost   \n" +
+        "| Order ID     | Event date | Customer code| Set menu| Price | Table | Cost   \n" +
         "-------------------------------------------------------------------------\n";
     private final String ORDER_TABLE_FOOTER =
         "-------------------------------------------------------------------------\n";

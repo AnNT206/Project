@@ -1,5 +1,6 @@
 package tools;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import model.Customer;
@@ -102,7 +103,20 @@ public class Inputter {
         x.setProvince(inputAndLoop("Province: ", Acceptable.PROVINCE_VALID, true));
         x.setMenuId(inputAndLoop("Menu ID: ", Acceptable.MENU_ID_VALID, true));
         x.setNumOfTables(getInt("Enter number of tables: "));
-        x.setEventDate(new Date());
+        x.setEventDate(getEventDate("Enter event date (dd/MM/yyyy): "));
         return x;
+    }
+
+    public Date getEventDate(String mess) {
+        String dateStr = getString(mess);
+        try {
+            // Parse date in format dd/MM/yyyy
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            return sdf.parse(dateStr);
+        } catch (Exception e) {
+            System.out.println("Invalid date format! Please use dd/MM/yyyy");
+            return getEventDate(mess);
+        }
     }
 }

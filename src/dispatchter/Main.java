@@ -64,7 +64,11 @@ public class Main {
                     break;
                 case 5:
                     Order order = ndl.getOrderInfo();
-                    if (dsdh.isDuplicate(order)) {
+                    // Check if customer exists
+                    Customer customer = dskh.searchById(order.getCustomerId());
+                    if (customer == null) {
+                        System.out.println("Customer not found! Please register customer before placing order.");
+                    } else if (dsdh.isDuplicate(order)) {
                         System.out.println("Order already exists!");
                     } else {
                         dsdh.addNew(order);

@@ -116,6 +116,8 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("|%5s|%-12s|%5s|%5s|%-8d|%-14s|", this.orderCode, this.eventDate, this.customerId, this.menuId, this.numOfTables, this.province);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = sdf.format(this.eventDate);
+        return String.format("|%5s|%-12s|%-14s|%9s|%-8d|%-14s|", this.orderCode, formattedDate, this.customerId, this.menuId, this.numOfTables, this.province);
     }
 }
