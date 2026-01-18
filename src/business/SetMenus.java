@@ -12,6 +12,12 @@ import model.SetMenu;
 
 public class SetMenus extends ArrayList<SetMenu> {
 
+    private final String MENU_TABLE_HEADER =
+        "-------------------------------------------------------------------------\n" +
+        "| Menu ID| Menu Name           | Price     | Ingredients                  |\n" +
+        "-------------------------------------------------------------------------\n";
+    private final String MENU_TABLE_FOOTER =
+        "-------------------------------------------------------------------------\n";
     private String pathFile;
 
     //constructor
@@ -22,9 +28,11 @@ public class SetMenus extends ArrayList<SetMenu> {
     }
 
     public void showAll() {
+        System.out.println(MENU_TABLE_HEADER);
         for (SetMenu i : this) {
             System.out.println(i);
         }
+        System.out.println(MENU_TABLE_FOOTER);
     }
 
     public void readFromFile() {

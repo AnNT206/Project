@@ -116,6 +116,6 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("|%5s|%-10s|%5s|%5s|%-10s|%-8d|%-14s|", this.orderCode, this.eventDate, this.customerId, this.menuId, this.numOfTables, this.province, this.eventDate);
+        return String.format("|%5s|%-12s|%5s|%5s|%-8d|%-14s|", this.orderCode, this.eventDate, this.customerId, this.menuId, this.numOfTables, this.province);
     }
 }

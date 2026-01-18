@@ -15,6 +15,7 @@ public class Main {
         int choice = 0;
         Customers dskh = new Customers();
         SetMenus mn = new SetMenus();
+        Orders dsdh = new Orders();
         //--------- MENU ---------//
         do {
             choice = ndl.getInt("------------------------------------------\n"
@@ -25,7 +26,7 @@ public class Main {
                     + "\"5.Place a feast order.\n"
                     + "\"6.Update order information.\n"
                     + "\"7.Save data to file.\n"
-                    + "\"8.Display Customer or O rder lists.\n"
+                    + "\"8.Display Customer or Order lists.\n"
                     + "\"Others- Quit.\n"
                     + "------------------------------------------\n"
                     + "Your choice: ");
@@ -62,14 +63,44 @@ public class Main {
                     mn.showAll();
                     break;
                 case 5:
+                    Order order = ndl.getOrderInfo();
+                    if (dsdh.isDuplicate(order)) {
+                        System.out.println("Order already exists!");
+                    } else {
+                        dsdh.addNew(order);
+                        System.out.println("Order placed successfully!");
+                    }
                     break;
                 case 6:
                     break;
                 case 7:
+                    dskh.saveToFile();
+                    dsdh.saveToFile();
+                    System.out.println("Data saved successfully!");
                     break;
                 case 8:
-                    System.out.println("DANH SACH KHACH HANG:");
-                    dskh.showAll();
+                    int displayChoice = 0;
+                    do {
+                        displayChoice = ndl.getInt(
+                            "------------------------------------------\n" +
+                            "\"1.Display customer list.\n" +
+                            "\"2.Display order list.\n" +
+                            "\"Others- Back to main menu.\n" +
+                            "------------------------------------------\n" +
+                            "Your choice: ");
+                        switch (displayChoice) {
+                            case 1:
+                                System.out.println("DANH SACH KHACH HANG:");
+                                dskh.showAll();
+                                break;
+                            case 2:
+                                System.out.println("DANH SACH DON HANG:");
+                                dsdh.showAll();
+                                break;
+                            default:
+                                System.out.println("Back to main menu...");
+                        }
+                    } while (displayChoice >= 1 && displayChoice <= 2);
                     break;
                 default:
                     System.out.println("END...");

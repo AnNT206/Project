@@ -53,7 +53,7 @@ public class SetMenu {
 
     @Override
     public String toString() {
-        return "SetMenu{" + "menuId=" + menuId + ", menuName=" + menuName + ", price=" + price + ", ingredients=" + ingredients + '}';
+        return String.format("|%6s|%-20s|%10.2f|%-30s|", menuId, menuName, price, ingredients);
     }
 
 }

@@ -1,7 +1,9 @@
 package tools;
 
+import java.util.Date;
 import java.util.Scanner;
 import model.Customer;
+import model.Order;
 
 public class Inputter {
 
@@ -68,6 +70,14 @@ public class Inputter {
         return inputAndLoop("Email address: ", Acceptable.EMAIL_VALID, true);
     }
 
+    public String getMenuId(String mess) {
+        return inputAndLoop("Menu ID: ", Acceptable.MENU_ID_VALID, true);
+    }
+
+    public String getProvince(String mess) {
+        return inputAndLoop("Province: ", Acceptable.PROVINCE_VALID, true);
+    }
+
     public Customer getCustomerInfo() {
         Customer x = new Customer();
         x.setId(inputAndLoop("Customer ID: ", Acceptable.CUS_ID_VALID, true));
@@ -83,6 +93,16 @@ public class Inputter {
         x.setName(inputAndLoop("Customer name: ", Acceptable.NAME_VALID, true));
         x.setPhone(inputAndLoop("Phone number: ", Acceptable.PHONE_VALID, true));
         x.setEmail(inputAndLoop("Customer email: ", Acceptable.EMAIL_VALID, true));
+        return x;
+    }
+
+    public Order getOrderInfo() {
+        Order x = new Order();
+        x.setCustomerId(inputAndLoop("Customer ID: ", Acceptable.CUS_ID_VALID, true));
+        x.setProvince(inputAndLoop("Province: ", Acceptable.PROVINCE_VALID, true));
+        x.setMenuId(inputAndLoop("Menu ID: ", Acceptable.MENU_ID_VALID, true));
+        x.setNumOfTables(getInt("Enter number of tables: "));
+        x.setEventDate(new Date());
         return x;
     }
 }
