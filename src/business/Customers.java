@@ -29,6 +29,10 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
         super();
         this.saved = true;
         this.pathFile = "./customers.dat";
+        // Add test customers for testing
+        this.put("C0001", new Customer("C0001", "Nguyen Van A", "0123456789", "vana@gmail.com"));
+        this.put("C0002", new Customer("C0002", "Tran Thi B", "0987654321", "btran@gmail.com"));
+        this.put("C0003", new Customer("C0003", "Le Van C", "0789654321", "cvan@gmail.com"));
     }
 
     public boolean isSaved() {
@@ -44,11 +48,10 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
     @Override
     public void update(Customer x) {
         Customer existing = this.get(x.getId());
-        if (existing != null) {
+        if(existing != null){
             existing.setName(x.getName());
-            existing.setPhone(x.getPhone());
             existing.setEmail(x.getEmail());
-            this.saved = false;
+            existing.setPhone(x.getPhone());
         }
     }
 
@@ -60,9 +63,8 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
     public List<Customer> filterByName(String name) {
         List<Customer> result = new ArrayList<>();
         for (Customer i : this.values()) {
-            if (i.getName().toLowerCase().contains(name.toLowerCase())) {
+            if(i.getName().toLowerCase().contains(name.toLowerCase()))
                 result.add(i);
-            }
         }
         return result;
     }

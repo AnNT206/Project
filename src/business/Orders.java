@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -30,6 +32,51 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
         this.saved = true;
         this.pathFile = "./feast_order_service.dat";
         this.readFromFile();
+        // Test
+        Order o1 = new Order();
+        o1.setOrderCode("20260101100001");
+        o1.setCustomerId("C0001");
+        o1.setProvince("Hanoi");
+        o1.setMenuId("PW001");
+        o1.setNumOfTables(5);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            o1.setEventDate(sdf.parse("15/06/2026"));
+        } catch (Exception e) {
+            o1.setEventDate(new Date());
+        }
+        this.add(o1);
+
+        Order o2 = new Order();
+        o2.setOrderCode("20260102100002");
+        o2.setCustomerId("C0002");
+        o2.setProvince("Ho Chi Minh");
+        o2.setMenuId("PW002");
+        o2.setNumOfTables(10);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            o2.setEventDate(sdf.parse("20/07/2026"));
+        } catch (Exception e) {
+            o2.setEventDate(new Date());
+        }
+        this.add(o2);
+
+        Order o3 = new Order();
+        o3.setOrderCode("20260103100003");
+        o3.setCustomerId("C0003");
+        o3.setProvince("Da Nang");
+        o3.setMenuId("PW003");
+        o3.setNumOfTables(8);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            o3.setEventDate(sdf.parse("25/08/2026"));
+        } catch (Exception e) {
+            o3.setEventDate(new Date());
+        }
+        this.add(o3);
     }
 
     public boolean isSaved() {
@@ -50,8 +97,7 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     @Override
     public void update(Order x) {
         for (Order i : this) {
-            if (i.getOrderCode().equalsIgnoreCase(x.getOrderCode())) {
-                
+            if(i.getOrderCode().equalsIgnoreCase(x.getOrderCode())){
                 this.remove(i);
                 this.add(x);
                 this.saved = false;
@@ -63,7 +109,7 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     @Override
     public Order searchById(String orderCode){
         Order result = null;
-        Iterator<Order> it = this.iterator();
+        Iterator <Order> it = this.iterator();
         while(it.hasNext() && result == null){
             Order x = it.next();
             if(x.getOrderCode().equalsIgnoreCase(orderCode)){
