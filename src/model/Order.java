@@ -118,6 +118,6 @@ public class Order implements Serializable {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = sdf.format(this.eventDate);
-        return String.format("|%5s|%-12s|%-14s|%9s|%-8d|%-14s|", this.orderCode, formattedDate, this.customerId, this.menuId, this.numOfTables, this.province);
+        return String.format("|%5s|%-12s|%-14s|%-9s|%-8d|%-11s|", this.orderCode, formattedDate, this.customerId, this.menuId.toUpperCase(), this.numOfTables, this.province);
     }
 }

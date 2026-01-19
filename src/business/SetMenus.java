@@ -14,7 +14,7 @@ public class SetMenus extends ArrayList<SetMenu> {
 
     private final String MENU_TABLE_HEADER =
         "-------------------------------------------------------------------------\n" +
-        "| Menu ID| Menu Name           | Price     | Ingredients                  |\n" +
+        "| Menu ID| Menu Name             | Price    | Ingredients                \n" +
         "-------------------------------------------------------------------------\n";
     private final String MENU_TABLE_FOOTER =
         "-------------------------------------------------------------------------\n";

@@ -119,4 +119,15 @@ public class Inputter {
             return getEventDate(mess);
         }
     }
+
+    public Order getOrderInfoToUpdate(String existingOrderCode) {
+        Order x = new Order();
+        x.setOrderCode(existingOrderCode);
+        x.setCustomerId(inputAndLoop("Customer ID: ", Acceptable.CUS_ID_VALID, true));
+        x.setProvince(inputAndLoop("Province: ", Acceptable.PROVINCE_VALID, true));
+        x.setMenuId(inputAndLoop("Menu ID: ", Acceptable.MENU_ID_VALID, true));
+        x.setNumOfTables(getInt("Enter number of tables: "));
+        x.setEventDate(getEventDate("Enter event date (dd/MM/yyyy): "));
+        return x;
+    }
 }

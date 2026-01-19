@@ -41,9 +41,9 @@ public class Main {
                     if (existingCustomer == null) {
                         System.out.println("Customer not found!");
                     } else {
-                        System.out.println("Current customer information:\n");
+                        System.out.println("Current customer information:");
                         System.out.println(existingCustomer);
-                        System.out.println("Update new information:\n");
+                        System.out.println("Update new information:");
                         Customer updatedCustomer = ndl.getCustomerInfoToUpdate(customerId);
                         dskh.update(updatedCustomer);
                         System.out.println("Customer updated successfully!");
@@ -74,8 +74,21 @@ public class Main {
                         dsdh.addNew(order);
                         System.out.println("Order placed successfully!");
                     }
+                    dsdh.showAll();
                     break;
                 case 6:
+                    String orderCode = ndl.getString("Enter order code to update: ");
+                    Order existingOrder = dsdh.searchById(orderCode);
+                    if (existingOrder == null) {
+                        System.out.println("Order not found!");
+                    } else {
+                        System.out.println("Current order information:");
+                        System.out.println(existingOrder);
+                        System.out.println("Update new information:");
+                        Order updatedOrder = ndl.getOrderInfoToUpdate(orderCode);
+                        dsdh.update(updatedOrder);
+                        System.out.println("Order updated successfully!");
+                    }
                     break;
                 case 7:
                     dskh.saveToFile();

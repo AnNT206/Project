@@ -16,11 +16,11 @@ import model.Order;
 
 public class Orders extends HashSet<Order> implements Workable<Order> {
     private final String ORDER_TABLE_HEADER = 
-        "-------------------------------------------------------------------------\n" +
-        "| Order ID     | Event date | Customer code| Set menu| Price | Table | Cost   \n" +
-        "-------------------------------------------------------------------------\n";
+        "|-------------------------------------------------------------------------|\n" +
+        "| Order ID     | Event date | Customer code| Set menu| Table  | Province  |\n" +
+        "|-------------------------------------------------------------------------|";
     private final String ORDER_TABLE_FOOTER =
-        "-------------------------------------------------------------------------\n";
+        "|-------------------------------------------------------------------------|\n";
     private String pathFile;
     private boolean saved;
 
@@ -51,7 +51,10 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     public void update(Order x) {
         for (Order i : this) {
             if (i.getOrderCode().equalsIgnoreCase(x.getOrderCode())) {
-                i = x;
+                
+                this.remove(i);
+                this.add(x);
+                this.saved = false;
                 break;
             }
         }
