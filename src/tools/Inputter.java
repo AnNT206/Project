@@ -110,7 +110,7 @@ public class Inputter {
     public Date getEventDate(String mess) {
         String dateStr = getString(mess);
         try {
-            // Parse date in format dd/MM/yyyy
+            // định dạng dd/MM/yyyy
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             sdf.setLenient(false);
             return sdf.parse(dateStr);
