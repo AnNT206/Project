@@ -32,6 +32,7 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
         this.saved = true;
         this.pathFile = "./feast_order_service.dat";
         this.readFromFile();
+        this.saveToFile();
         // Test
         Order o1 = new Order();
         o1.setOrderCode("20260101100001");

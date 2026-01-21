@@ -29,6 +29,8 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
         super();
         this.saved = true;
         this.pathFile = "./customers.dat";
+        this.readFromFile();
+        this.saveToFile();
         // Add test customers for testing
         this.put("C0001", new Customer("C0001", "Nguyen Van A", "0123456789", "vana@gmail.com"));
         this.put("C0002", new Customer("C0002", "Tran Thi B", "0987654321", "btran@gmail.com"));
