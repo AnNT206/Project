@@ -62,11 +62,12 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
         return this.get(id);
     }
 
-    public List<Customer> filterByName(String name) {
+    public List<Customer> filterByName(String name){
         List<Customer> result = new ArrayList<>();
         for (Customer i : this.values()) {
-            if(i.getName().toLowerCase().contains(name.toLowerCase()))
+            if(i.getName().toLowerCase().contains(name.toLowerCase())){
                 result.add(i);
+            }
         }
         return result;
     }

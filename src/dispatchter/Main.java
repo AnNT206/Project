@@ -53,9 +53,10 @@ public class Main {
                 case 3:
                     String name = ndl.getName("Enter customer name: ");
                     List<Customer> result = dskh.filterByName(name);
-                    if (result.isEmpty()) {
-                        System.out.println("No customer found.");
-                    } else {
+                    if(result.isEmpty()){
+                        System.out.println("Not found");
+                    }
+                    else{
                         dskh.showAll(result);
                     }
                     break;

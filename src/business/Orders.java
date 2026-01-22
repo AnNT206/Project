@@ -110,7 +110,7 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     @Override
     public Order searchById(String orderCode){
         Order result = null;
-        Iterator <Order> it = this.iterator();
+        Iterator<Order> it = this.iterator();
         while(it.hasNext() && result == null){
             Order x = it.next();
             if(x.getOrderCode().equalsIgnoreCase(orderCode)){
