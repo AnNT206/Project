@@ -3,10 +3,13 @@ package dispatchter;
 import business.Customers;
 import business.Orders;
 import business.SetMenus;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import model.Customer;
 import model.Order;
 import tools.Inputter;
 import java.util.List;
+import javax.swing.text.DateFormatter;
 
 public class Main {
 
@@ -47,16 +50,14 @@ public class Main {
                         Customer updatedCustomer = ndl.getCustomerInfoToUpdate(customerId);
                         dskh.update(updatedCustomer);
                         System.out.println("Customer updated successfully!");
-
                     }
                     break;
                 case 3:
                     String name = ndl.getName("Enter customer name: ");
                     List<Customer> result = dskh.filterByName(name);
-                    if(result.isEmpty()){
-                        System.out.println("Not found");
-                    }
-                    else{
+                    if (result.isEmpty()) {
+                        System.out.println("Customer not found!");
+                    } else {
                         dskh.showAll(result);
                     }
                     break;
@@ -65,17 +66,26 @@ public class Main {
                     break;
                 case 5:
                     Order order = ndl.getOrderInfo();
-                    // Check if customer exists
                     Customer customer = dskh.searchById(order.getCustomerId());
+
                     if (customer == null) {
-                        System.out.println("Customer not found! Please register customer before placing order.");
+                        System.out.println("Customer not found!");
                     } else if (dsdh.isDuplicate(order)) {
                         System.out.println("Order already exists!");
+                    } else if (order.getEventDate() == null) {
+                        System.out.println("Event date is missing!");
                     } else {
-                        dsdh.addNew(order);
-                        System.out.println("Order placed successfully!");
+                        LocalDate currentDate = LocalDate.now();
+                        LocalDate eventDate = order.getEventDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+
+                        if (!eventDate.isAfter(currentDate)) {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                            System.out.println("Event date must be after " + currentDate.format(dtf));
+                        } else {
+                            dsdh.addNew(order);
+                            System.out.println("Order placed successfully!");
+                        }
                     }
-                    dsdh.showAll();
                     break;
                 case 6:
                     String orderCode = ndl.getString("Enter order code to update: ");
@@ -100,12 +110,12 @@ public class Main {
                     int displayChoice = 0;
                     do {
                         displayChoice = ndl.getInt(
-                            "------------------------------------------\n" +
-                            "\"1.Display customer list.\n" +
-                            "\"2.Display order list.\n" +
-                            "\"Others- Back to main menu.\n" +
-                            "------------------------------------------\n" +
-                            "Your choice: ");
+                                "------------------------------------------\n"
+                                + "\"1.Display customer list.\n"
+                                + "\"2.Display order list.\n"
+                                + "\"Others- Back to main menu.\n"
+                                + "------------------------------------------\n"
+                                + "Your choice: ");
                         switch (displayChoice) {
                             case 1:
                                 System.out.println("DANH SACH KHACH HANG:");

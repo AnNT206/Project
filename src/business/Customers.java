@@ -43,7 +43,7 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
 
     @Override
     public void addNew(Customer x) {
-        this.put(x.getId(), x); //put hoặc putIfAbsent
+        this.put(x.getId(), x);
         this.saved = false;
     }
 
@@ -92,7 +92,7 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
                 return;
             }
             FileOutputStream fos = null;
-            
+
             //1. Tạo File object
             File f = new File(this.pathFile);
             //2. Tạo FileObjectSteam ánh xạ tới File object
@@ -114,13 +114,13 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
             Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public final void readFromFile(){
+
+    public final void readFromFile() {
         try {
             FileInputStream fis = null;
             //1. Tạo File object
-            File f= new File(this.pathFile);
-            if(!f.exists()){
+            File f = new File(this.pathFile);
+            if (!f.exists()) {
                 System.out.println("Customer.dat file not found!.");
                 return;
             }
@@ -129,7 +129,7 @@ public class Customers extends HashMap<String, Customer> implements Workable<Cus
             //3. Tạo đối tượng
             ObjectInputStream ois = new ObjectInputStream(fis);
             //4. Lặp để đọc dữ liệu
-            while(fis.available() > 0){
+            while (fis.available() > 0) {
                 Customer x = (Customer) ois.readObject();
                 this.put(x.getId(), x);
             }

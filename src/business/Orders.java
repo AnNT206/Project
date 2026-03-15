@@ -89,23 +89,27 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     }
 
     @Override
-    public void addNew(Order x) {
-        if(!this.isDuplicate(x)){
-            this.add(x);
-        }
-    }
+   public void addNew(Order x) {
+       if (!isDuplicate(x)) {
+           this.add(x);
+       }
+   }
     
     @Override
     public void update(Order x) {
         for (Order i : this) {
             if(i.getOrderCode().equalsIgnoreCase(x.getOrderCode())){
-                this.remove(i);
-                this.add(x);
+                i.setEventDate(x.getEventDate());
+                i.setMenuId(x.getMenuId());
+                i.setNumOfTables(x.getNumOfTables());
+                i.setProvince(x.getProvince());
                 this.saved = false;
-                break;
+                return;
             }
         }
     }
+    
+    
     
     @Override
     public Order searchById(String orderCode){
