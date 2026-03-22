@@ -4,12 +4,10 @@ import business.Customers;
 import business.Orders;
 import business.SetMenus;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import model.Customer;
 import model.Order;
 import tools.Inputter;
 import java.util.List;
-import javax.swing.text.DateFormatter;
 
 public class Main {
 
@@ -53,9 +51,9 @@ public class Main {
                     }
                     break;
                 case 3:
-                    String name = ndl.getName("Enter customer name: ");
+                    String name = ndl.getString("Enter customer name to search: ");
                     List<Customer> result = dskh.filterByName(name);
-                    if (result.isEmpty()) {
+                    if (result == null) {
                         System.out.println("Customer not found!");
                     } else {
                         dskh.showAll(result);
@@ -72,15 +70,12 @@ public class Main {
                         System.out.println("Customer not found!");
                     } else if (dsdh.isDuplicate(order)) {
                         System.out.println("Order already exists!");
-                    } else if (order.getEventDate() == null) {
-                        System.out.println("Event date is missing!");
                     } else {
                         LocalDate currentDate = LocalDate.now();
                         LocalDate eventDate = order.getEventDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
 
                         if (!eventDate.isAfter(currentDate)) {
-                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                            System.out.println("Event date must be after " + currentDate.format(dtf));
+                            System.out.println("Event date must be after current date");
                         } else {
                             dsdh.addNew(order);
                             System.out.println("Order placed successfully!");
@@ -90,18 +85,29 @@ public class Main {
                 case 6:
                     String orderCode = ndl.getString("Enter order code to update: ");
                     Order existingOrder = dsdh.searchById(orderCode);
+                    
                     if (existingOrder == null) {
                         System.out.println("Order not found!");
                     } else {
                         System.out.println("Current order information:");
                         System.out.println(existingOrder);
+                        
                         System.out.println("Update new information:");
                         Order updatedOrder = ndl.getOrderInfoToUpdate(orderCode);
-                        dsdh.update(updatedOrder);
-                        System.out.println("Order updated successfully!");
+                        
+                        LocalDate currentDate = LocalDate.now();
+                        LocalDate eventDate = updatedOrder.getEventDate().toInstant()
+                                .atZone(java.time.ZoneId.systemDefault())
+                                .toLocalDate();
+                        
+                        if (!eventDate.isAfter(currentDate)) {
+                            System.out.println("Event date must be after current date!");
+                        } else {
+                            dsdh.update(updatedOrder);
+                            System.out.println("Order updated successfully!");
+                        }
                     }
-                    break;
-                case 7:
+            case 7:
                     dskh.saveToFile();
                     dsdh.saveToFile();
                     System.out.println("Data saved successfully!");
@@ -135,6 +141,7 @@ public class Main {
 
             }
         } while (choice >= 1 && choice <= 8);
-    }
+        }
 
+    
 }

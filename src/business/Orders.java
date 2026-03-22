@@ -17,12 +17,13 @@ import java.util.logging.Logger;
 import model.Order;
 
 public class Orders extends HashSet<Order> implements Workable<Order> {
-    private final String ORDER_TABLE_HEADER = 
-        "|-------------------------------------------------------------------------|\n" +
-        "| Order ID     | Event date | Customer code| Set menu| Table  | Province  |\n" +
-        "|-------------------------------------------------------------------------|";
-    private final String ORDER_TABLE_FOOTER =
-        "|-------------------------------------------------------------------------|\n";
+
+    private final String ORDER_TABLE_HEADER
+            = "|-------------------------------------------------------------------------|\n"
+            + "| Order ID     | Event date | Customer code| Set menu| Table  | Province  |\n"
+            + "|-------------------------------------------------------------------------|";
+    private final String ORDER_TABLE_FOOTER
+            = "|-------------------------------------------------------------------------|\n";
     private String pathFile;
     private boolean saved;
 
@@ -36,7 +37,7 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
         // Test
         Order o1 = new Order();
         o1.setOrderCode("20260101100001");
-        o1.setCustomerId("C0001");
+        o1.setCustomerId("C0000");
         o1.setProvince("Hanoi");
         o1.setMenuId("PW001");
         o1.setNumOfTables(5);
@@ -89,16 +90,16 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     }
 
     @Override
-   public void addNew(Order x) {
-       if (!isDuplicate(x)) {
-           this.add(x);
-       }
-   }
-    
+    public void addNew(Order x) {
+        if (!isDuplicate(x)) {
+            this.add(x);
+        }
+    }
+
     @Override
     public void update(Order x) {
         for (Order i : this) {
-            if(i.getOrderCode().equalsIgnoreCase(x.getOrderCode())){
+            if (i.getOrderCode().equalsIgnoreCase(x.getOrderCode())) {
                 i.setEventDate(x.getEventDate());
                 i.setMenuId(x.getMenuId());
                 i.setNumOfTables(x.getNumOfTables());
@@ -108,28 +109,26 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
             }
         }
     }
-    
-    
-    
+
     @Override
-    public Order searchById(String orderCode){
-        Order result = null;
+    public Order searchById(String orderCode) {
+        Order result  = null;
         Iterator<Order> it = this.iterator();
-        while(it.hasNext() && result == null){
-            Order x = it.next();
-            if(x.getOrderCode().equalsIgnoreCase(orderCode)){
+        while (it.hasNext() && result == null) {
+            Order x =it.next();
+            if (x.getOrderCode().equalsIgnoreCase(orderCode)) {
                 result = x;
             }
         }
         return result;
     }
-    
+
     @Override
-    public void showAll(){
+    public void showAll() {
         showAll(this);
     }
 
-    public void showAll(Collection<Order> l){
+    public void showAll(Collection<Order> l) {
         System.out.println(ORDER_TABLE_HEADER);
         for (Order i : l) {
             System.out.println(i);
@@ -139,26 +138,25 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
 
     public void saveToFile() {
         try {
-            // 0. kiểm tra nếu đã lưu rồi thì không ghi nữa
+
             if (this.saved) {
                 return;
             }
             FileOutputStream fos = null;
 
-            //1. Tạo File object
             File f = new File(this.pathFile);
-            //2. Tạo FileObjectStream ánh xạ tới File object
+
             fos = new FileOutputStream(f);
-            //3. Tạo ObjectOutputStream để chuyển dữ liệu xuống thiết bị
+
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            // 4. Lặp để ghi dữ liệu
+
             for (Order i : this) {
                 oos.writeObject(i);
             }
-            //5. Đóng các object tương ứng
+
             oos.close();
             fos.close();
-            //6. Ghi nhận trạng thái mới
+
             this.saved = true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Orders.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,22 +168,22 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
     public void readFromFile() {
         try {
             FileInputStream fis = null;
-            //1. Tạo File object
+
             File f = new File(this.pathFile);
             if (!f.exists()) {
                 System.out.println("feast_order_service.dat file not found!.");
                 return;
             }
-            //2. Tạo lường ánh xạ
+
             fis = new FileInputStream(f);
-            //3. Tạo đối tượng
+
             ObjectInputStream ois = new ObjectInputStream(fis);
-            //4. Lặp để đọc dữ liệu
+
             while (fis.available() > 0) {
                 Order x = (Order) ois.readObject();
                 this.add(x);
             }
-            //5. Đóng đối tượng
+
             ois.close();
             fis.close();
             this.saved = true;
@@ -198,4 +196,3 @@ public class Orders extends HashSet<Order> implements Workable<Order> {
         }
     }
 }
-

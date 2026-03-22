@@ -12,12 +12,12 @@ import model.SetMenu;
 
 public class SetMenus extends ArrayList<SetMenu> {
 
-    private final String MENU_TABLE_HEADER =
-        "-------------------------------------------------------------------------\n" +
-        "| Menu ID| Menu Name             | Price    | Ingredients                \n" +
-        "-------------------------------------------------------------------------\n";
-    private final String MENU_TABLE_FOOTER =
-        "-------------------------------------------------------------------------\n";
+    private final String MENU_TABLE_HEADER
+            = "-------------------------------------------------------------------------\n"
+            + "| Menu ID| Menu Name             | Price    | Ingredients                \n"
+            + "-------------------------------------------------------------------------\n";
+    private final String MENU_TABLE_FOOTER
+            = "-------------------------------------------------------------------------\n";
     private String pathFile;
 
     //constructor
@@ -38,13 +38,13 @@ public class SetMenus extends ArrayList<SetMenu> {
     public void readFromFile() {
         FileReader fr = null;
         try {
-            //1. tạo file
+
             File f = new File(pathFile);
-            //2. ánh xạ
+
             fr = new FileReader(f);
-            //3. tạo bộ đệm để chuyển FileReader
+
             BufferedReader br = new BufferedReader(fr);
-            //4. lặp để đọc dữ liệu
+
             String tam = "";
             while ((tam = br.readLine()) != null) {
                 SetMenu x = textToObject(tam);
@@ -64,7 +64,6 @@ public class SetMenus extends ArrayList<SetMenu> {
                 Logger.getLogger(SetMenus.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-      
     }
 
     private SetMenu textToObject(String tam) {
